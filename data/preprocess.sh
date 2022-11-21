@@ -1,6 +1,8 @@
 #!/bin/bash
 echo "preparing test steps"
-python3 test_steps/preprocess.py
+cd test_steps/
+python3 preprocess.py
+cd ..
 echo "preparing"
 python3 preprocess.py
 echo "copying"
