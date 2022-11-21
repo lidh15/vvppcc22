@@ -1,14 +1,14 @@
 FROM gramineproject/gramine:latest
 
 RUN apt-get update && \
-    apt-get install -y unzip python3-distutils make gcc && \
+    apt-get install -y unzip python3-distutils && \
     apt-get clean
 
 RUN curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py && \
 python3 /tmp/get-pip.py && \
 rm -rf /tmp/* && \
 pip3 install --upgrade setuptools && \
-pip3 install tqdm==4.47.0 torch==1.9.1 protobuf==3.20
+pip3 install tables pandas scikit-learn
 
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
