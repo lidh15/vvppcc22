@@ -1,5 +1,5 @@
 echo "sh train.sh work_dir sgx|direct actinn_dir data_dir result_dir"
-echo "e.g. sh train.sh code/test_steps sgx /workspace workspace/data/encrypted /workspace"
+echo "e.g. sh train.sh code/test_steps sgx /workspace workspace/data/encrypted /workspace/results"
 export HDF5_USE_FILE_LOCKING="FALSE"
 cd $1
 chown -R root:root /$4/
