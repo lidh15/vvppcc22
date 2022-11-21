@@ -1,3 +1,4 @@
 [submodule "ACTINN-PyTorch"]
 	path = ACTINN-PyTorch
-	url = ./ACTINN-PyTorch/
+	url = git@github.com:lidh15/ACTINN-PyTorch.git
+	branch = main
