@@ -43,4 +43,5 @@
 #### Step 2: run with remote attestation
 
 - Follow gramine official PPML documentation, get [gramine-1.3.1](https://github.com/gramineproject/gramine/releases/tag/v1.3.1) from github and build `ra-tls-*` CI-examples.
-- ?
+- If the CI-examples failed, copy `wrap_key` from guest to host, run ``make clean && make WRAP_KEY=`hexdump -e '16/1 "%02x"' wrap_key` SGX=1`` to put the key into manifest without ra-tls.
+- Run `sh train.sh . sgx /workspace workspace/data/encrypted /workspace/results` and you should see training summary printed, and model in `/workspace/results/` once again.

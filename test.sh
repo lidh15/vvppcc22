@@ -1,5 +1,5 @@
-echo "bash test.sh work_dir sgx|direct actinn_dir data_dir result_dir"
-echo "e.g. sh test.sh code/test_steps sgx /workspace workspace/data/encrypted /workspace/results"
+echo "usage: sh test.sh work_dir sgx|direct actinn_dir data_dir result_dir"
+echo "e.g. sh test.sh . sgx /workspace workspace/data/encrypted /workspace/results"
 export HDF5_USE_FILE_LOCKING="FALSE"
 cd $1
 gramine-$2 ./python $3/ACTINN-PyTorch/classify.py \

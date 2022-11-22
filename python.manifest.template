@@ -13,6 +13,7 @@ loader.pal_internal_mem_size = "128M"
 
 sys.enable_sigterm_injection = true
 
+fs.insecure__keys.default = "{{ wrap_key }}"
 fs.mounts = [
   { path = "/lib", uri = "file:{{ gramine.runtimedir() }}" },
   { path = "{{ arch_libdir }}", uri = "file:{{ arch_libdir }}" },
@@ -25,6 +26,10 @@ fs.mounts = [
   { path = "/workspace/results", uri = "file:/workspace/results" },
   { path = "/workspace/data", uri = "file:/workspace/data" },
   { path = "/workspace/code", uri = "file:/workspace/code" },
+
+  { path = "/workspace/data/encrypted/test_steps", uri = "file:/workspace/data/encrypted/test_steps", type = "encrypted" },
+  # maybe different wrap_key, but in fact the same
+  { path = "/workspace/data/encrypted", uri = "file:/workspace/data/encrypted", type = "encrypted" },
 
   { type = "tmpfs", path = "/tmp" },
 ]

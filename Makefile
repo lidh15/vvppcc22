@@ -13,12 +13,15 @@ all: python.manifest.sgx python.sig python.token
 endif
 
 RA_TYPE ?= none
+# The perfect insider
+WRAP_KEY ?= ffffffffffffffffffffffffffffffff
 
 python.manifest: python.manifest.template
 	gramine-manifest \
 		-Dlog_level=$(GRAMINE_LOG_LEVEL) \
 		-Darch_libdir=$(ARCH_LIBDIR) \
 		-Dra_type=$(RA_TYPE) \
+		-Dwrap_key=$(WRAP_KEY) \
 		-Dentrypoint=$(realpath $(shell sh -c "command -v python3")) \
 		$< >$@
 
