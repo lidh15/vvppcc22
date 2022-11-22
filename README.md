@@ -21,14 +21,14 @@
     export WORKDIR=`pwd`
     ```
 
-### Guest
+### Guest(甲方)
 
 - For guest, SGX is not provided, run the container with `docker run --rm --name guest -it -v $WORKDIR:/workspace -d wppcc2022:guest /bin/bash`
 - Enter guest container and go to workspace.
 - **Make sure you've put your train.csv as well as test.csv in `data`**, go to `data` and run `sh preprocess.sh` and `sh pf-encrypt.sh`.
 
 
-### Host
+### Host(乙方)
 
 #### Step 1: run without remote attestation
 
