@@ -8,11 +8,14 @@
 ## Experiments Setup
 
 - Build runtime environment with `Dockerfile.{host,guest}`:
+
     ```shell
     docker build . -f Dockerfile.host -t wppcc2022:host
     docker build . -f Dockerfile.guest -t wppcc2022:guest
     ```
+
 - Let this directory be your `WORKDIR`:
+
     ```shell
     vim README.md  # you should see me now!
     export WORKDIR=`pwd`
