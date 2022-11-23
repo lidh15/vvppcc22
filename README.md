@@ -34,6 +34,7 @@
 
 - Run a container with `docker run --rm --previleged --device /dev/sgx_enclave --device /dev/sgx_provision --name host1 -it -v $WORKDIR:/workspace -d wppcc2022:host /bin/bash`
 - Enter host container and go to workspace.
+- Run `gramine-sgx-gen-private-key` first.
 - **Make sure you've put the preprocessed data in `data`** (this requirement is met by default because the host and the guest are mapping the same workspace).
 - Firstly, run `make clean && make`, the manifest for gramine-direct should be made.
 - Run `sh train.sh . direct /workspace workspace/data/test_steps /workspace/results` and you should see training summary printed, and model in `/workspace/results/`.
