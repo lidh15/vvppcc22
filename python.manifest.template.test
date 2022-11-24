@@ -23,12 +23,12 @@ fs.mounts = [
   { path = "/etc", uri = "file:/etc" },
 
   { path = "/workspace/ACTINN-PyTorch", uri = "file:/workspace/ACTINN-PyTorch" },
-  # { path = "/workspace/results", uri = "file:/workspace/results" },
-  # { path = "/workspace/data", uri = "file:/workspace/data" },
+  { path = "/workspace/results", uri = "file:/workspace/results" },
+  { path = "/workspace/data", uri = "file:/workspace/data" },
 
   # maybe different wrap_key, but in fact the same
-  { path = "/workspace/results", uri = "file:/workspace/results", type = "encrypted" },
-  { path = "/workspace/data", uri = "file:/workspace/data", type = "encrypted" },
+  # { path = "/workspace/results", uri = "file:/workspace/results", type = "encrypted" },
+  # { path = "/workspace/data", uri = "file:/workspace/data", type = "encrypted" },
 
   { type = "tmpfs", path = "/tmp" },
 ]
@@ -52,12 +52,12 @@ sgx.trusted_files = [
   "file:{{ python.stdlib }}/",
   "file:{{ python.distlib }}/",
   "file:/workspace/ACTINN-PyTorch/",
-  # "file:/workspace/data/",
+  "file:/workspace/data/",
 ]
 
 sgx.allowed_files = [
   "file:/workspace/ACTINN-PyTorch/",
   "file:/usr/lib/python3.8/",
   "file:/usr/local/lib/python3.8/",
-  # "file:/workspace/results/"
+  "file:/workspace/results/"
 ]

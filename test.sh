@@ -6,4 +6,4 @@ gramine-$2 ./python $3/ACTINN-PyTorch/classify.py \
     --predict $4/test/test.h5 \
     --result $5/result.csv \
     --pretrained $5/model_epoch_5_iter_0.pth
-gramine-$2 ./python $3/ACTINN-PyTorch/evaluate.py $5/result.csv $5/test_lab.csv
+gramine-$2 ./python $3/ACTINN-PyTorch/evaluate.py $5/result.csv  $4/test/test_lab.csv
