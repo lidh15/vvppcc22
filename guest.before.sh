@@ -2,7 +2,7 @@ cd /workspace/ACTINN-PyTorch
 pip3 install -e .
 gramine-sgx-gen-private-key
 cd /workspace/vvppcc22-master/data
-unzip data.zip
+unzip train.zip
 sh preprocess.sh
 if [ -f test.csv ]; then
     sh pf-encrypt.sh
