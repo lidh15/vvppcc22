@@ -5,7 +5,7 @@
 - guest: who provides data and requires model (甲方)
 - host: who provides TEE, takes encrypted data and returns encrypted model (乙方)
 
-## Not experients
+## Not experiments
 
 - Do this:
 
