@@ -11,7 +11,7 @@
 
     ```shell
     unzip ACTINN-PyTorch.zip
-    mv ACTINN-PyTorch-master ACTINN-PyTorch
+    mv ACTINN-PyTorch-main ACTINN-PyTorch
     unzip vvppcc22.zip
     # Suppose you have guest and host containers ready.
     docker exec -it guest bash
