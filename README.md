@@ -10,9 +10,9 @@
 - Do this:
 
     ```shell
-    unzip ACTINN-PyTorch.zip
+    unzip ACTINN-PyTorch-main.zip
     mv ACTINN-PyTorch-main ACTINN-PyTorch
-    unzip vvppcc22.zip
+    unzip vvppcc22-master.zip
     # Suppose you have guest and host containers ready.
     docker exec -it guest bash
     > cd /workspace && sh guest.before.sh && exit
