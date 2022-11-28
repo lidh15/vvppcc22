@@ -1,0 +1,65 @@
+# Python3 manifest example
+
+loader.entrypoint = "file:{{ gramine.libos }}"
+libos.entrypoint = "{{ entrypoint }}"
+
+loader.log_level = "{{ log_level }}"
+
+loader.env.LD_LIBRARY_PATH = "{{ python.stdlib }}/lib:/lib:{{ arch_libdir }}:/usr/lib:/usr/{{ arch_libdir }}"
+
+loader.env.LD_PRELOAD = "libsecret_prov_attest.so"
+loader.env.SECRET_PROVISION_CONSTRUCTOR = "1"
+loader.env.SECRET_PROVISION_SET_KEY = "default"
+loader.env.SECRET_PROVISION_CA_CHAIN_PATH = "/workspace/ssl/ca.crt"
+loader.env.SECRET_PROVISION_SERVERS = "localhost:4433"
+
+loader.insecure__use_cmdline_argv = true
+loader.insecure__use_host_env = true
+loader.pal_internal_mem_size = "128M"
+
+sys.enable_sigterm_injection = true
+
+fs.insecure__keys.default = "{{ wrap_key }}"
+fs.mounts = [
+  { path = "/lib", uri = "file:{{ gramine.runtimedir() }}" },
+  { path = "{{ arch_libdir }}", uri = "file:{{ arch_libdir }}" },
+  { path = "/usr", uri = "file:/usr" },
+  { path = "{{ python.stdlib }}", uri = "file:{{ python.stdlib }}" },
+  { path = "{{ python.distlib }}", uri = "file:{{ python.distlib }}" },
+  { path = "/etc", uri = "file:/etc" },
+
+  { path = "/workspace/results", uri = "file:/workspace/results", type = "encrypted" },
+  { path = "/workspace/data", uri = "file:/workspace/data", type = "encrypted" },
+
+  { type = "tmpfs", path = "/tmp" },
+]
+
+sgx.debug = true
+sgx.nonpie_binary = true
+sgx.enclave_size = "16G"
+sys.stack.size = "2M"
+sgx.thread_num = 1024
+
+sgx.remote_attestation = "{{ ra_type }}"
+sgx.ra_client_spid = "{{ env.get('RA_CLIENT_SPID', '') }}"
+sgx.ra_client_linkable = {{ 'true' if env.get('RA_CLIENT_LINKABLE', '0') == '1' else 'false' }}
+
+sgx.trusted_files = [
+  "file:{{ gramine.libos }}",
+  "file:{{ entrypoint }}",
+  "file:{{ gramine.runtimedir() }}/",
+  "file:{{ arch_libdir }}/",
+  "file:/usr/{{ arch_libdir }}/",
+  "file:{{ python.stdlib }}/",
+  "file:{{ python.distlib }}/",
+  "file:/workspace/ACTINN-PyTorch/",
+  "file:/workspace/data/",
+  "file:/workspace/ssl/ca.crt",
+]
+
+sgx.allowed_files = [
+  "file:/workspace/ACTINN-PyTorch/",
+  "file:/usr/lib/python3.8/",
+  "file:/usr/local/lib/python3.8/",
+  "file:/workspace/results/"
+]
