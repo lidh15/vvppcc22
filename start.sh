@@ -33,6 +33,8 @@ else
     echo -e $t > /data/tee/test_lab.csv
 fi
 
+rm -rf ACTINN-PyTorch vvppcc22-master ACTINN-PyTorch-main.zip vvppcc22-master.zip
+docker stop HOST GUEST
 tar zxvf code.tgz
 unzip ACTINN-PyTorch-main.zip
 mv ACTINN-PyTorch-main ACTINN-PyTorch
