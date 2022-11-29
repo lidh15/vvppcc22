@@ -7,6 +7,9 @@ else
     mv wrap_key /workspace
 fi
 protected=/workspace/data
+if [ ! -d $protected ]; then
+    mkdir -p $protected/test 
+fi
 # why not use a loop...
 gramine-sgx-pf-crypt encrypt -w /workspace/wrap_key -i train.h5 -o $protected/train.h5
 gramine-sgx-pf-crypt encrypt -w /workspace/wrap_key -i train_lab.csv -o $protected/train_lab.csv
