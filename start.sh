@@ -30,7 +30,7 @@ else
     m=$((${n% *} - 1))
     t=""
     for i in `seq $m`; do t=$t"\t\n"; done
-    echo -e $t > /data/tee/test_lab.csv
+    echo $t > /data/tee/test_lab.csv
 fi
 
 rm -rf ACTINN-PyTorch vvppcc22-master ACTINN-PyTorch-main.zip vvppcc22-master.zip
