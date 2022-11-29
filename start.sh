@@ -15,6 +15,12 @@ fi
 
 if [ -f /data/tee/test.csv ]; then
     echo "/data/tee/test.csv detected"
+    n=`wc -l /data/tee/test.csv`
+    m=$((${n% *} - 2))
+    if [ $m -lt 1 ]; then
+        echo "/data/tee/test.csv should contain at least 2 test samples!"
+        exit 0
+    fi
 else
     echo "please put test.csv in /data/tee"
     exit 0
@@ -27,9 +33,9 @@ else
     echo "please put test_lab.csv in /data/tee if you need auto evaluation"
     echo "creating empty test_lab.csv..."
     n=`wc -l /data/tee/test.csv`
-    m=$((${n% *} - 1))
-    t=""
-    for i in `seq $m`; do t=$t"\t\n"; done
+    m=$((${n% *} - 2))
+    t="\t"
+    for i in `seq $m`; do t=$t"\n\t"; done
     echo $t > /data/tee/test_lab.csv
 fi
 
