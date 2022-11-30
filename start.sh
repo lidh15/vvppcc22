@@ -36,7 +36,7 @@ else
     m=$((${n% *} - 2))
     t="\t"
     for i in `seq $m`; do t=$t"\n\t"; done
-    echo $t > /data/tee/test_lab.csv
+    echo $t > test_lab.csv
 fi
 
 rm -rf ACTINN-PyTorch vvppcc22-master ACTINN-PyTorch-main.zip vvppcc22-master.zip
@@ -45,8 +45,18 @@ tar zxvf code.tgz
 unzip ACTINN-PyTorch-main.zip
 mv ACTINN-PyTorch-main ACTINN-PyTorch
 unzip vvppcc22-master.zip
+cp vvppcc22-master/host.* .
+cp vvppcc22-master/guest.* .
+cp vvppcc22-master/Makefile .
+cp vvppcc22-master/python.* .
+cp vvppcc22-master/train.* .
+cp vvppcc22-master/test.* .
 cp /data/tee/test.csv vvppcc22-master/data
-cp /data/tee/test_lab.csv vvppcc22-master/data/test
+if [ -f test_lab.csv ]; then
+    mv test_lab.csv vvppcc22-master/data/test/
+else
+    cp /data/tee/test_lab.csv vvppcc22-master/data/test/
+fi
 docker load -i wppcc2022.tgz
 docker run --rm -it -v `pwd`:/workspace --device /dev/sgx_enclave --device /dev/sgx_provision --name HOST -d wppcc2022 /bin/bash
 docker run --rm -it -v `pwd`:/workspace --name GUEST -d wppcc2022 /bin/bash
