@@ -7,7 +7,9 @@
 
 ## Not experiments
 
-- Do this:
+- Make sure everything is under correct path (check `start.sh` out).
+
+- Do this (also check `run.sh`):
 
     ```shell
     unzip ACTINN-PyTorch-main.zip
@@ -21,6 +23,8 @@
     docker exec -it guest bash
     > cd /workspace && sh guest.after.sh && exit
     ```
+
+- If you really gotta two machines instead of using two containers sharing a mounted path, run `python3 host.recv.py` at host, and run `sh guest.send.sh` at guest.
 
 ## Experiments
 
@@ -54,7 +58,6 @@
 
 #### After the model trained
 
-- If RA is available, close the document, scripts here are working with RA not accessible.
 - Go to `results` and run `sh pf-decrypt.sh` to reveal the trained model.
 - Go outside and run `sh test.guest.sh` and you should see test summary printed.
 
@@ -79,7 +82,7 @@
 
 - Make sure the environment preparation in Step 1 is done.
 - Follow [gramine official PPML documentation](https://gramine.readthedocs.io/en/stable/tutorials/pytorch/index.html), get [gramine-1.3.1](https://github.com/gramineproject/gramine/releases/tag/v1.3.1) from github and build `ra-tls-*` CI-examples.
-- If the CI-examples succeeded, close this document and follow official PPML tutorial.
-- If the CI-examples failed, copy `wrap_key` from guest to host, rep run ``make clean && make WRAP_KEY=`hexdump -e '16/1 "%02x"' wrap_key` SGX=1`` to put the key into manifest without ra-tls.
+- If the CI-examples succeeded, use `python.manifest.template.ra` as `python.manifesct.template`, copy `wrap_key` from guest to host, run `make clean && make RA_TYPE=dcap SGX=1`.
+- If the CI-examples failed, copy `wrap_key` from guest to host, run ``make clean && make WRAP_KEY=`hexdump -e '16/1 "%02x"' wrap_key` SGX=1`` to put the key into manifest without ra-tls.
 - Run `sh train.sh . sgx /workspace workspace/data /workspace/results` and you should see training summary printed, and model in `/workspace/results/` once again.
 - Run `sh test.sh . sgx /workspace workspace/data /workspace/results` and you should see test summary printed.

@@ -7,18 +7,13 @@ loader.log_level = "{{ log_level }}"
 
 loader.env.LD_LIBRARY_PATH = "{{ python.stdlib }}/lib:/lib:{{ arch_libdir }}:/usr/lib:/usr/{{ arch_libdir }}"
 
-loader.env.LD_PRELOAD = "libsecret_prov_attest.so"
-loader.env.SECRET_PROVISION_CONSTRUCTOR = "1"
-loader.env.SECRET_PROVISION_SET_KEY = "default"
-loader.env.SECRET_PROVISION_CA_CHAIN_PATH = "/workspace/ssl/ca.crt"
-loader.env.SECRET_PROVISION_SERVERS = "localhost:4433"
-
 loader.insecure__use_cmdline_argv = true
 loader.insecure__use_host_env = true
 loader.pal_internal_mem_size = "128M"
 
 sys.enable_sigterm_injection = true
 
+fs.insecure__keys.default = "{{ wrap_key }}"
 fs.mounts = [
   { path = "/lib", uri = "file:{{ gramine.runtimedir() }}" },
   { path = "{{ arch_libdir }}", uri = "file:{{ arch_libdir }}" },
@@ -26,8 +21,12 @@ fs.mounts = [
   { path = "{{ python.stdlib }}", uri = "file:{{ python.stdlib }}" },
   { path = "{{ python.distlib }}", uri = "file:{{ python.distlib }}" },
   { path = "/etc", uri = "file:/etc" },
-  { path = "/workspace/ssl", uri = "file:/workspace/ssl" },
 
+  { path = "/workspace/ACTINN-PyTorch", uri = "file:/workspace/ACTINN-PyTorch" },
+  # { path = "/workspace/results", uri = "file:/workspace/results" },
+  # { path = "/workspace/data", uri = "file:/workspace/data" },
+
+  # maybe different wrap_key, but in fact the same
   { path = "/workspace/results", uri = "file:/workspace/results", type = "encrypted" },
   { path = "/workspace/data", uri = "file:/workspace/data", type = "encrypted" },
 
@@ -53,17 +52,12 @@ sgx.trusted_files = [
   "file:{{ python.stdlib }}/",
   "file:{{ python.distlib }}/",
   "file:/workspace/ACTINN-PyTorch/",
-  "file:/etc/host.conf",
-  "file:/etc/hosts",
-  "file:/etc/nsswitch.conf",
-  "file:/etc/resolv.conf",
-  "file:/workspace/ssl/ca.crt",
+  # "file:/workspace/data/",
 ]
 
 sgx.allowed_files = [
-  # we have these guys here because python wanna make __pycache__
-  # you can remove them once there is no longer new files created
   "file:/workspace/ACTINN-PyTorch/",
   "file:/usr/lib/python3.8/",
   "file:/usr/local/lib/python3.8/",
+  # "file:/workspace/results/"
 ]

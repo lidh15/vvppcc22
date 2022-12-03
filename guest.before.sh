@@ -1,6 +1,6 @@
 cd /workspace/ACTINN-PyTorch
 pip3 install -e .
-gramine-sgx-gen-private-key
+gramine-sgx-gen-private-key -f
 cd /workspace/vvppcc22-master/data
 unzip train.zip
 sh preprocess.sh

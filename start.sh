@@ -51,6 +51,7 @@ cp vvppcc22-master/Makefile .
 cp vvppcc22-master/python.* .
 cp vvppcc22-master/train.* .
 cp vvppcc22-master/test.* .
+cp vvppcc22-master/prepare_dcap.sh .
 cp /data/tee/test.csv vvppcc22-master/data
 if [ -f test_lab.csv ]; then
     mv test_lab.csv vvppcc22-master/data/test/
